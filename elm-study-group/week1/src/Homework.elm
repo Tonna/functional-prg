@@ -86,6 +86,7 @@ compress str =
                 ( a, b ) ->
                     if isIn a b then
                         b
+
                     else
                         a :: b
 

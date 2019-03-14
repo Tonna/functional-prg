@@ -1,4 +1,7 @@
-module Homework exposing (Address, Profile, User, andMap, bird, bird2, bird3, catMaybes, convert, convert2, convert3, mapMaybes, setPhone)
+module Homework exposing (Address, Profile, User, andMap, bird, bird2, bird3, buldStatsUrl, catMaybes, convert, convert2, convert3, mapMaybes, setPhone)
+
+import Date exposing (Date)
+import Url.Builder as UrlBuilder
 
 
 convert :
@@ -131,3 +134,15 @@ catMaybes list =
 
                 Just a ->
                     a :: catMaybes xs
+
+
+buldStatsUrl : Int -> { startDate : Maybe String, numElems : Maybe Int } -> String
+buldStatsUrl itemId ps =
+    "https://myapi.com"
+        ++ UrlBuilder.absolute
+            [ "api", "item", String.fromInt itemId, "stats.json" ]
+            (catMaybes
+                [ Maybe.map (UrlBuilder.string "start_date") ps.startDate
+                , Maybe.map (UrlBuilder.string "num_items" << String.fromInt) ps.numElems
+                ]
+            )
